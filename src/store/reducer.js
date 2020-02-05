@@ -3,13 +3,12 @@ import * as mutations from "./mutations";
 
 export let defaultState = {
   session: { id: "huk", token: "", authenticated: false },
-  trainingSession: {
-    userPhrases: [
-      { phrase: "bla", translation: "fra" },
-      { phrase: "Bio", translation: "Fio" },
-      { phrase: "Ham", translation: "Bam" }
-    ]
-  },
+  trainingSession: {},
+  userPhrases: [
+    { phrase: "bla", translation: "fra" },
+    { phrase: "Bio", translation: "Fio" },
+    { phrase: "Ham", translation: "Bam" }
+  ],
   phrasesSet: []
 };
 
@@ -26,11 +25,10 @@ export function auth(state = defaultState, action) {
       return { ...state, ...session, authenticated };
     case mutations.REQUEST_USER_ACCOUNT_CREATION:
       return { ...state, ...session, authenticated: true };
-    case mutations.SET_PHRASES_SET:
+    case mutations.SET_PHRASES:
       return {
         ...state,
-        // ...state.trainingSession,
-        phrasesSet: action.phrasesSet
+        userPhrases: action.transformedPhrases
       };
     default:
       return state;

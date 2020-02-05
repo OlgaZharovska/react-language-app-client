@@ -3,19 +3,17 @@ import * as mutations from "../store/mutations";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
-import { Button } from "./ButtonComponent";
-import { Link } from "react-router-dom";
-import { getPhrases } from "../actions/phrases";
+import { requestSetPhrases } from "../actions/phrases";
 import { store } from "../store";
 
 class TrainComponent extends React.Component {
   constructor(props) {
     super(props);
-    let { trainingSession, phrasesSet, id } = props;
+    let { trainingSession, id } = props;
     this.state = {
       checkingPhrase: trainingSession.checkingPhrase || false,
       color: "none",
-      currentSet: phrasesSet,
+      // currentSet: phrasesSet,
       answer: "",
       id: id,
       showPhrase: false
@@ -29,8 +27,8 @@ class TrainComponent extends React.Component {
   onChangeInput(e) {
     this.setState({
       color: "blue",
-      answer: e.target.value,
-      currentSet: this.props.phrasesSet
+      answer: e.target.value
+      // currentSet: this.props.phrasesSet
     });
     console.log(this.state.answer);
     console.log(e.target.value);
@@ -40,18 +38,18 @@ class TrainComponent extends React.Component {
   }
 
   onCheck(e) {
-    if (this.state.answer === this.state.currentSet[1]) {
-      this.setState({ color: "green" });
-      console.log("suces");
-    } else {
-      this.setState({ color: "red" });
-    }
+    // if (this.state.answer === this.state.currentSet[1]) {
+    //   this.setState({ color: "green" });
+    //   console.log("suces");
+    // } else {
+    //   this.setState({ color: "red" });
+    // }
     console.log(this.state.answer);
     console.log(this.state.currentSet);
   }
 
   onNextPhrase() {
-    this.props.getPhrases();
+    // this.props.getPhrases();
     this.setState({ color: "none", showPhrase: false });
   }
 
@@ -60,9 +58,9 @@ class TrainComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getPhrases();
-    this.setState({ currentSet: this.props.phrasesSet });
-    console.log(this.state.currentSet);
+    this.props.requestSetPhrases();
+    // this.setState({ currentSet: this.props.phrasesSet });
+    // console.log(this.state.currentSet);
     console.log(this.state.answer);
   }
 
@@ -122,7 +120,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getPhrases: () => dispatch(getPhrases())
+  requestSetPhrases: () => dispatch(requestSetPhrases())
 });
 
 export default compose(

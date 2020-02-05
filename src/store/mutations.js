@@ -11,6 +11,8 @@ export const GET_PHRASES = `GET_PHRASES`;
 export const SET_PHRASES_SET = `SET_PHRASES_SET`;
 export const REQUEST_LOGOUT = `REQUEST_LOGOUT`;
 export const LOGOUT_USER = `LOGOUT_USER`;
+export const REQUEST_SET_PHRASES = `REQUEST_SET_PHRASES`;
+export const SET_PHRASES = `SET_PHRASES`;
 
 export const requestAuthenticateUser = (email, password, history) => ({
   type: REQUEST_AUTHENTICATE_USER,
@@ -52,5 +54,5 @@ export const requestCreateUserAccount = (name, email, password) => ({
   password
 });
 
-export const getPhrasesFromStore = state => state.trainingSession.userPhrases;
+export const getPhrasesFromStore = state => state.userPhrases;
 export const callForRandomPhrases = state => state.trainingSession.userPhrases;

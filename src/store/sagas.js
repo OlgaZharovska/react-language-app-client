@@ -1,5 +1,5 @@
 import { take, put, select } from "redux-saga/effects";
-import uuid from "uuid";
+// import uuid from "uuid";
 import axios from "axios";
 
 import * as mutations from "./mutations";
@@ -64,6 +64,7 @@ export function* userAuthenticationSaga() {
         })
       );
       history.push(`/dashboard`);
+      //set phrases to store if any
     } catch (e) {
       yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
     }
@@ -79,9 +80,9 @@ export function* requestLogoutSaga() {
   }
 }
 
-export function* phrasesLoadingSaga() {
+export function* phrasesSettingSaga() {
   while (true) {
-    yield take(mutations.GET_PHRASES);
+    yield take(mutations.REQUEST_SET_PHRASES);
     try {
       const phrases = yield select(mutations.getPhrasesFromStore);
       let transformedPhrases = [];
@@ -89,21 +90,22 @@ export function* phrasesLoadingSaga() {
         transformedPhrases.push([phrases[i].phrase, phrases[i].translation]);
       }
       console.log(transformedPhrases);
-      const makeRandomNum = function(min, max) {
-        return 0 + Math.floor(Math.random() * (max + 1 - min));
-      };
 
-      const numberPointer = makeRandomNum(0, transformedPhrases.length - 1);
-      const phrasesSet = transformedPhrases[numberPointer];
-      console.log(numberPointer);
-      console.log(phrasesSet);
       yield put({
-        type: mutations.SET_PHRASES_SET,
-        phrasesSet
+        type: mutations.SET_PHRASES,
+        transformedPhrases
       });
+      // const makeRandomNum = function(min, max) {
+      //   return 0 + Math.floor(Math.random() * (max + 1 - min));
+      // };
+
+      // const numberPointer = makeRandomNum(0, transformedPhrases.length - 1);
+      // const phrasesSet = transformedPhrases[numberPointer];
+      // console.log(numberPointer);
+      // console.log(phrasesSet);
     } catch (e) {
-      /* catch block handles failed login */
-      yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
+      console.log(e);
+      // yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
     }
   }
 }

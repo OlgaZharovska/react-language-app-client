@@ -1,3 +1,3 @@
-export const getPhrases = () => ({
-  type: "GET_PHRASES"
+export const requestSetPhrases = () => ({
+  type: "REQUEST_SET_PHRASES"
 });
