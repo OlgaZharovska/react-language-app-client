@@ -57,6 +57,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export const ConnectedPreSignup = connect(null, mapDispatchToProps, null, {
-  pure: false
-})(SignupComponent);
+export const ConnectedPreSignup = connect(
+  null,
+  mapDispatchToProps
+)(SignupComponent);

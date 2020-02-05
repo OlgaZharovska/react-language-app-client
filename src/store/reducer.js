@@ -9,6 +9,7 @@ export let defaultState = {
     { phrase: "Bio", translation: "Fio" },
     { phrase: "Ham", translation: "Bam" }
   ],
+  phrasesToTrain: [],
   phrasesSet: []
 };
 
@@ -28,7 +29,7 @@ export function auth(state = defaultState, action) {
     case mutations.SET_PHRASES:
       return {
         ...state,
-        userPhrases: action.transformedPhrases
+        phrasesToTrain: action.transformedPhrases
       };
     default:
       return state;

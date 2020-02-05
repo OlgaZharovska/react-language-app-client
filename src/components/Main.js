@@ -24,11 +24,11 @@ export const Main = () => (
     <BrowserRouter>
       <Switch>
         <React.Fragment>
-          <Route exact path="/" render={RouteGuard(Home)} />
+          <Route exact path="/" render={Home} />
           <Route exact path="/signup" component={ConnectedPreSignup} />
           <Route exact path="/login" component={ConnectedLogin} />
-          <Route exact path="/train" component={TrainComponent} />
-          <Route exact path="/dashboard" render={RouteGuard(Dashboard)} />
+          <Route exact path="/train" component={RouteGuard(TrainComponent)} />
+          <Route exact path="/dashboard" component={RouteGuard(Dashboard)} />
           <Route exact path="/confirm/:id" component={ConnectedConfirm} />
         </React.Fragment>
       </Switch>

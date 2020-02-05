@@ -6,14 +6,17 @@ import { compose } from "redux";
 import { requestSetPhrases } from "../actions/phrases";
 import { store } from "../store";
 
+console.log(store.getState());
+
 class TrainComponent extends React.Component {
   constructor(props) {
     super(props);
-    let { trainingSession, id } = props;
+    let { id } = props;
     this.state = {
-      checkingPhrase: trainingSession.checkingPhrase || false,
+      // checkingPhrase: trainingSession.checkingPhrase || false,
+      isCorrect: false,
       color: "none",
-      // currentSet: phrasesSet,
+      phrasesSet: [],
       answer: "",
       id: id,
       showPhrase: false
@@ -54,21 +57,21 @@ class TrainComponent extends React.Component {
   }
 
   onShow() {
-    this.setState({ showPhrase: true });
+    // this.setState({ showPhrase: true });
+    console.log(this.props.phrases);
   }
 
   componentDidMount() {
-    this.props.requestSetPhrases();
-    // this.setState({ currentSet: this.props.phrasesSet });
-    // console.log(this.state.currentSet);
-    console.log(this.state.answer);
+    console.log(this.props.phrases);
+    const makeRandomNum = function(min, max) {
+      return 0 + Math.floor(Math.random() * (max + 1 - min));
+    };
+    const numberPointer = makeRandomNum(0, this.props.phrases.length - 1);
+    const phrasesSet = this.props.phrases[numberPointer];
+    console.log(phrasesSet);
+    this.setState({ phrasesSet });
+    console.log("did mount");
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.state.currentSet.length === 0) {
-  //     return true;
-  //   }
-  // }
 
   render() {
     return (
@@ -80,8 +83,8 @@ class TrainComponent extends React.Component {
           id="screen"
           style={{ background: `${this.state.color}`, width: 120, height: 60 }}
         >
-          {this.props.phrasesSet.length !== 0
-            ? this.props.phrasesSet[0]
+          {this.state.phrasesSet.length !== 0
+            ? this.state.phrasesSet[0]
             : "waiting"}
         </div>
         {this.state.showPhrase ? this.props.phrasesSet[1] : null}
@@ -90,9 +93,9 @@ class TrainComponent extends React.Component {
             type="text"
             id="phrase_input"
             placeholder={
-              this.props.trainingSession.isCorrect
-                ? "Please enter translation"
-                : "CorrectPhrase"
+              this.state.isCorrect
+                ? "CorrectPhrase"
+                : "Please enter translation"
             }
             onInput={this.onChangeInput}
           />
@@ -113,15 +116,12 @@ class TrainComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  trainingSession: state.trainingSession,
-  phrasesSet: state.phrasesSet,
-  id: state.session.id
+const mapStateToProps = ({ phrasesToTrain, session }) => ({
+  phrases: phrasesToTrain,
+  id: session.id
 });
 
-const mapDispatchToProps = dispatch => ({
-  requestSetPhrases: () => dispatch(requestSetPhrases())
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

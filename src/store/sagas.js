@@ -63,6 +63,18 @@ export function* userAuthenticationSaga() {
           name: data.name
         })
       );
+      const phrases = yield select(mutations.getPhrasesFromStore);
+      let transformedPhrases = [];
+      for (let i = 0; i < phrases.length; i++) {
+        transformedPhrases.push([phrases[i].phrase, phrases[i].translation]);
+      }
+      console.log(transformedPhrases);
+
+      yield put({
+        type: mutations.SET_PHRASES,
+        transformedPhrases
+      });
+
       history.push(`/dashboard`);
       //set phrases to store if any
     } catch (e) {
@@ -80,32 +92,24 @@ export function* requestLogoutSaga() {
   }
 }
 
-export function* phrasesSettingSaga() {
-  while (true) {
-    yield take(mutations.REQUEST_SET_PHRASES);
-    try {
-      const phrases = yield select(mutations.getPhrasesFromStore);
-      let transformedPhrases = [];
-      for (let i = 0; i < phrases.length; i++) {
-        transformedPhrases.push([phrases[i].phrase, phrases[i].translation]);
-      }
-      console.log(transformedPhrases);
+// export function* phrasesSettingSaga() {
+//   while (true) {
+//     yield take(mutations.REQUEST_SET_PHRASES);
+//     try {
+//       const phrases = yield select(mutations.getPhrasesFromStore);
+//       let transformedPhrases = [];
+//       for (let i = 0; i < phrases.length; i++) {
+//         transformedPhrases.push([phrases[i].phrase, phrases[i].translation]);
+//       }
+//       console.log(transformedPhrases);
 
-      yield put({
-        type: mutations.SET_PHRASES,
-        transformedPhrases
-      });
-      // const makeRandomNum = function(min, max) {
-      //   return 0 + Math.floor(Math.random() * (max + 1 - min));
-      // };
-
-      // const numberPointer = makeRandomNum(0, transformedPhrases.length - 1);
-      // const phrasesSet = transformedPhrases[numberPointer];
-      // console.log(numberPointer);
-      // console.log(phrasesSet);
-    } catch (e) {
-      console.log(e);
-      // yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
-    }
-  }
-}
+//       yield put({
+//         type: mutations.SET_PHRASES,
+//         transformedPhrases
+//       });
+//     } catch (e) {
+//       console.log(e);
+//       // yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED));
+//     }
+//   }
+// }

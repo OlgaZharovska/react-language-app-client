@@ -3,10 +3,13 @@ import React from "react";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 import * as mutations from "../store/mutations";
-
-const Dashboard = ({ logoutUser }) => (
+import { store } from "../store";
+import { Link } from "react-router-dom";
+console.log(store.getState());
+const Dashboard = ({ logoutUser, phrases }) => (
   <div className="row">
     manager
+    <Link to="/train">Blog</Link>
     <button onClick={logoutUser} style={{ width: "50px", height: "10px" }}>
       LOGOUT
     </button>
@@ -20,10 +23,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  isLoading: state.session.authenticated
+  isLoading: state.session.authenticated,
+  phrases: state.phrasesToTrain
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps, null, { pure: false }),
+  connect(mapStateToProps, mapDispatchToProps),
   withRouter
 )(Dashboard);
