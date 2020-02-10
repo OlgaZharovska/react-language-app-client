@@ -9,7 +9,11 @@ export let defaultState = {
     { phrase: "Bio", translation: "Fio" },
     { phrase: "Ham", translation: "Bam" }
   ],
-  phrasesToTrain: [],
+  phrasesToTrain: [
+    ["vla", "bfa"],
+    ["laaa", "baaa"],
+    ["uuu", "fuuu"]
+  ],
   phrasesSet: []
 };
 

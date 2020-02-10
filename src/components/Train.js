@@ -15,6 +15,7 @@ class TrainComponent extends React.Component {
     this.state = {
       // checkingPhrase: trainingSession.checkingPhrase || false,
       isCorrect: false,
+      isChecking: false,
       color: "none",
       phrasesSet: [],
       answer: "",
@@ -29,26 +30,20 @@ class TrainComponent extends React.Component {
 
   onChangeInput(e) {
     this.setState({
-      color: "blue",
-      answer: e.target.value
-      // currentSet: this.props.phrasesSet
+      color: "none",
+      answer: e.target.value,
+      isChecking: false
     });
-    console.log(this.state.answer);
-    console.log(e.target.value);
-
-    // console.log(this.state);
-    console.log(store.getState());
   }
 
   onCheck(e) {
-    // if (this.state.answer === this.state.currentSet[1]) {
-    //   this.setState({ color: "green" });
-    //   console.log("suces");
-    // } else {
-    //   this.setState({ color: "red" });
-    // }
-    console.log(this.state.answer);
-    console.log(this.state.currentSet);
+    if (this.state.answer === this.state.phrasesSet[1]) {
+      this.setState({ color: "green", isChecking: true });
+      console.log("suces");
+    } else {
+      this.setState({ color: "red" });
+      this.refs.someName.value = "";
+    }
   }
 
   onNextPhrase() {
@@ -73,6 +68,10 @@ class TrainComponent extends React.Component {
     console.log("did mount");
   }
 
+  // this.state.isCorrect
+  //               ? "CorrectPhrase"
+  //               : "Please enter translation"
+
   render() {
     return (
       <div>
@@ -93,11 +92,12 @@ class TrainComponent extends React.Component {
             type="text"
             id="phrase_input"
             placeholder={
-              this.state.isCorrect
-                ? "CorrectPhrase"
+              this.state.color === "red"
+                ? `${this.state.phrasesSet[1]}`
                 : "Please enter translation"
             }
             onInput={this.onChangeInput}
+            ref="someName"
           />
         </div>
         <div className="btns">

@@ -63,17 +63,17 @@ export function* userAuthenticationSaga() {
           name: data.name
         })
       );
-      const phrases = yield select(mutations.getPhrasesFromStore);
-      let transformedPhrases = [];
-      for (let i = 0; i < phrases.length; i++) {
-        transformedPhrases.push([phrases[i].phrase, phrases[i].translation]);
-      }
-      console.log(transformedPhrases);
+      // const phrases = yield select(mutations.getPhrasesFromStore);
+      // let transformedPhrases = [];
+      // for (let i = 0; i < phrases.length; i++) {
+      //   transformedPhrases.push([phrases[i].phrase, phrases[i].translation]);
+      // }
+      // console.log(transformedPhrases);
 
-      yield put({
-        type: mutations.SET_PHRASES,
-        transformedPhrases
-      });
+      // yield put({
+      //   type: mutations.SET_PHRASES,
+      //   transformedPhrases
+      // });
 
       history.push(`/dashboard`);
       //set phrases to store if any
