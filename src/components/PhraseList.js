@@ -6,6 +6,7 @@ import { compose } from "redux";
 import { Link } from "react-router-dom";
 
 import Phrase from "./Phrase";
+import Pagination from "./Pagination";
 
 class PhraseList extends React.Component {
   constructor(props) {
@@ -16,11 +17,18 @@ class PhraseList extends React.Component {
 
   render() {
     return (
-      <ul className="list-group mb-4">
-        {this.props.phrases.map((item, i) => (
-          <Phrase key={i} phrase={item.phrase} translation={item.translation} />
-        ))}
-      </ul>
+      <>
+        <ul className="list-group mb-4">
+          {this.props.phrases.map((item, i) => (
+            <Phrase
+              key={i}
+              phrase={item.phrase}
+              translation={item.translation}
+            />
+          ))}
+        </ul>
+        <Pagination />
+      </>
     );
   }
 }
