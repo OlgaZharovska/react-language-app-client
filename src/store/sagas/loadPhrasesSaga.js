@@ -14,7 +14,7 @@ export function* loadPhrasesSaga() {
     //   headers: { Authorization: "Bearer " + token }
     // });
 
-    const phraseSet = yield axios.get(url + "/randomPhrase");
-    yield put(mutations.setPhrasesToTrain(phraseSet));
+    const phrases = yield axios.get(url + "/phrases");
+    yield put(mutations.setPhrases(phrases));
   }
 }

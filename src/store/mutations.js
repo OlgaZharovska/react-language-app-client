@@ -13,7 +13,6 @@ export const REQUEST_LOGOUT = `REQUEST_LOGOUT`;
 export const LOGOUT_USER = `LOGOUT_USER`;
 export const REQUEST_SET_PHRASES = `REQUEST_SET_PHRASES`;
 export const SET_PHRASES = `SET_PHRASES`;
-export const SET_PHRASES_TO_TRAIN = `SET_PHRASES_TO_TRAIN`;
 export const FETCH_PHRASES = `FETCH_PHRASES`;
 export const REQUEST_ADD_PHRASE = `REQUEST_ADD_PHRASE`;
 export const SAVE_REQUEST = `SAVE_REQUEST`;
@@ -59,9 +58,9 @@ export const requestCreateUserAccount = (name, email, password) => ({
   password
 });
 
-export const setPhrasesToTrain = (phraseSet) => ({
-  type: SET_PHRASES_TO_TRAIN,
-  phraseSet
+export const setPhrases = (phrases) => ({
+  type: SET_PHRASES,
+  phrases
 });
 
 export const requestAddPhrase = (phraseSet) => ({

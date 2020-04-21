@@ -37,10 +37,10 @@ export function auth(state = defaultState, action) {
     //     ...state,
     //     phrasesToTrain: action.transformedPhrases
     //   };
-    case mutations.SET_PHRASES_TO_TRAIN:
+    case mutations.SET_PHRASES:
       return {
         ...state,
-        phraseToTrain: action.phraseSet
+        userPhrases: action.phrases
       };
     case mutations.SAVE_REQUEST:
       return {

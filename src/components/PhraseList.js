@@ -1,6 +1,8 @@
 import React from "react";
 import * as mutations from "../store/mutations";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { compose } from "redux";
 import { Link } from "react-router-dom";
 
 import Phrase from "./Phrase";
@@ -15,8 +17,8 @@ class PhraseList extends React.Component {
   render() {
     return (
       <ul className="list-group mb-4">
-        {this.props.phrases.map((phrase, i) => (
-          <Phrase key={i} phrase={phrase} translation={translation} />
+        {this.props.phrases.map((item, i) => (
+          <Phrase key={i} phrase={item.phrase} translation={item.translation} />
         ))}
       </ul>
     );
@@ -38,7 +40,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
-export const ConnectedLogin = connect(
-  mapStateToProps,
-  mapDispatchToProps
+// export const ConnectedLogin = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(PhraseList);
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter
 )(PhraseList);
