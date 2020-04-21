@@ -40,6 +40,7 @@ class TrainComponent extends React.Component {
     if (this.state.answer === this.state.phrasesSet[1]) {
       this.setState({ color: "green", isChecking: true });
       console.log("suces");
+      console.log(this.props);
     } else {
       this.setState({ color: "red" });
       this.refs.someName.value = "";
@@ -53,12 +54,12 @@ class TrainComponent extends React.Component {
 
   onShow() {
     // this.setState({ showPhrase: true });
-    console.log(this.props.phrases);
+    console.log(this.props.id);
   }
 
   componentDidMount() {
     console.log(this.props.phrases);
-    const makeRandomNum = function(min, max) {
+    const makeRandomNum = function (min, max) {
       return 0 + Math.floor(Math.random() * (max + 1 - min));
     };
     const numberPointer = makeRandomNum(0, this.props.phrases.length - 1);
@@ -121,7 +122,7 @@ const mapStateToProps = ({ phrasesToTrain, session }) => ({
   id: session.id
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),

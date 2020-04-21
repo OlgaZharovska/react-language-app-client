@@ -11,6 +11,7 @@ import ConnectedConfirm from "./Confirm";
 import { store } from "../store";
 import { Redirect } from "react-router";
 import decode from "jwt-decode";
+import AddPhrase from "./AddPhrase";
 
 // const RouteGuard = Component => ({ match }) =>
 //   !store.getState().authenticated === "AUTHENTICATED" ? (
@@ -20,24 +21,22 @@ import decode from "jwt-decode";
 //   );
 
 const checkAuth = () => {
-  if (!store.getState().authenticated) {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-    if (!token) {
-      return false;
-    }
-
-    try {
-      // { exp: 12903819203 }
-      const { exp } = decode(token);
-
-      if (exp < new Date().getTime() / 1000) {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
+  if (!token) {
+    return false;
   }
+
+  // try {
+  //   // { exp: 12903819203 }
+  //   const { exp } = decode(token);
+
+  //   if (exp < new Date().getTime() / 1000) {
+  //     return false;
+  //   }
+  // } catch (e) {
+  //   return false;
+  // }
 
   return true;
 };
@@ -45,7 +44,7 @@ const checkAuth = () => {
 const ProtectedRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       checkAuth() ? (
         <Component {...props} />
       ) : (
@@ -60,14 +59,15 @@ export const Main = () => (
     <BrowserRouter>
       <Navigation auth={checkAuth()}></Navigation>
       <Switch>
-        <React.Fragment>
+        <>
           <Route exact path="/" render={Home} />
           <Route exact path="/signup" component={ConnectedPreSignup} />
           <Route exact path="/login" component={ConnectedLogin} />
+          <Route exact path="/addphrase" component={AddPhrase} />
           <ProtectedRoute exact path="/train" component={TrainComponent} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route exact path="/confirm/:id" component={ConnectedConfirm} />
-        </React.Fragment>
+        </>
       </Switch>
     </BrowserRouter>
   </Provider>

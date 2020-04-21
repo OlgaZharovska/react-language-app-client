@@ -13,6 +13,11 @@ export const REQUEST_LOGOUT = `REQUEST_LOGOUT`;
 export const LOGOUT_USER = `LOGOUT_USER`;
 export const REQUEST_SET_PHRASES = `REQUEST_SET_PHRASES`;
 export const SET_PHRASES = `SET_PHRASES`;
+export const SET_PHRASES_TO_TRAIN = `SET_PHRASES_TO_TRAIN`;
+export const FETCH_PHRASES = `FETCH_PHRASES`;
+export const REQUEST_ADD_PHRASE = `REQUEST_ADD_PHRASE`;
+export const SAVE_REQUEST = `SAVE_REQUEST`;
+export const SERVER_ERROR = `SERVER_ERROR`;
 
 export const requestAuthenticateUser = (email, password, history) => ({
   type: REQUEST_AUTHENTICATE_USER,
@@ -54,5 +59,25 @@ export const requestCreateUserAccount = (name, email, password) => ({
   password
 });
 
-export const getPhrasesFromStore = state => state.userPhrases;
-export const callForRandomPhrases = state => state.trainingSession.userPhrases;
+export const setPhrasesToTrain = (phraseSet) => ({
+  type: SET_PHRASES_TO_TRAIN,
+  phraseSet
+});
+
+export const requestAddPhrase = (phraseSet) => ({
+  type: REQUEST_ADD_PHRASE,
+  phraseSet
+});
+
+export const saveRequest = (res) => ({
+  type: SAVE_REQUEST,
+  res
+});
+export const serverError = (res) => ({
+  type: SERVER_ERROR,
+  res
+});
+
+export const getPhrasesFromStore = (state) => state.userPhrases;
+export const callForRandomPhrases = (state) =>
+  state.trainingSession.userPhrases;

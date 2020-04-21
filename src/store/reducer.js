@@ -14,7 +14,9 @@ export let defaultState = {
     ["laaa", "baaa"],
     ["uuu", "fuuu"]
   ],
-  phrasesSet: []
+  phraseToTrain: [],
+  phrasesSet: [],
+  serverResponse: {}
 };
 
 // export const reducer = combineReducers({ auth });
@@ -30,11 +32,27 @@ export function auth(state = defaultState, action) {
       return { ...state, ...session, authenticated };
     case mutations.REQUEST_USER_ACCOUNT_CREATION:
       return { ...state, ...session, authenticated: true };
-    case mutations.SET_PHRASES:
+    // case mutations.SET_PHRASES:
+    //   return {
+    //     ...state,
+    //     phrasesToTrain: action.transformedPhrases
+    //   };
+    case mutations.SET_PHRASES_TO_TRAIN:
       return {
         ...state,
-        phrasesToTrain: action.transformedPhrases
+        phraseToTrain: action.phraseSet
       };
+    case mutations.SAVE_REQUEST:
+      return {
+        ...state,
+        serverResponse: action.res
+      };
+    case mutations.SERVER_ERROR:
+      return {
+        ...state,
+        serverResponse: action.res
+      };
+
     default:
       return state;
   }
