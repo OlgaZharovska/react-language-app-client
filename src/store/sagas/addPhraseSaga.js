@@ -7,7 +7,7 @@ const url =
 
 export function* addPhraseSaga() {
   while (true) {
-    const phraseSet = yield take(mutations.REQUEST_ADD_PHRASE);
+    const { phraseSet } = yield take(mutations.REQUEST_ADD_PHRASE);
     const userName = localStorage.getItem("userName");
     const phraseObj = {
       phrase: phraseSet.phrase,
