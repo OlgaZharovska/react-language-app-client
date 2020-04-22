@@ -6,54 +6,39 @@ import { compose } from "redux";
 import { Link } from "react-router-dom";
 
 import Phrase from "./Phrase";
-import Pagination from "./Pagination";
+const PhraseList = ({ phrases }) => (
+  <>
+    <ul className="list-group mb-4">
+      {phrases.map((item, i) => (
+        <Phrase key={i} phrase={item.phrase} translation={item.translation} />
+      ))}
+    </ul>
+  </>
+);
 
-class PhraseList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export default PhraseList;
+// // class PhraseList extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.currentPage = 1;
+//     this.postsPerPagePage = 2;
+//   }
 
-  componentDidMount() {}
+//   componentDidMount() {}
 
-  render() {
-    return (
-      <>
-        <ul className="list-group mb-4">
-          {this.props.phrases.map((item, i) => (
-            <Phrase
-              key={i}
-              phrase={item.phrase}
-              translation={item.translation}
-            />
-          ))}
-        </ul>
-        <Pagination />
-      </>
-    );
-  }
-}
-
-const mapStateToProps = ({ userPhrases }) => ({
-  phrases: userPhrases
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  authenticateUser(e) {
-    e.preventDefault();
-    let email = e.target[`email`].value;
-    let password = e.target[`password`].value;
-    dispatch(
-      mutations.requestAuthenticateUser(email, password, ownProps.history)
-    );
-  }
-});
-
-// export const ConnectedLogin = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(PhraseList);
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withRouter
-)(PhraseList);
+//   render() {
+//     return (
+//       <>
+//         <ul className="list-group mb-4">
+//           {this.props.phrases.map((item, i) => (
+//             <Phrase
+//               key={i}
+//               phrase={item.phrase}
+//               translation={item.translation}
+//             />
+//           ))}
+//         </ul>
+//       </>
+//     );
+//   }
+// }

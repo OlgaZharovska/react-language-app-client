@@ -12,7 +12,7 @@ import { store } from "../store";
 import { Redirect } from "react-router";
 import decode from "jwt-decode";
 import AddPhrase from "./AddPhrase";
-import PhraseList from "./PhraseList";
+import PaginatedPhraseList from "./PaginatedPhraseList";
 
 // const RouteGuard = Component => ({ match }) =>
 //   !store.getState().authenticated === "AUTHENTICATED" ? (
@@ -65,7 +65,7 @@ export const Main = () => (
           <Route exact path="/signup" component={ConnectedPreSignup} />
           <Route exact path="/login" component={ConnectedLogin} />
           <Route exact path="/addphrase" component={AddPhrase} />
-          <Route exact path="/phraselist" component={PhraseList} />
+          <Route exact path="/phraselist" component={PaginatedPhraseList} />
           <ProtectedRoute exact path="/train" component={TrainComponent} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route exact path="/confirm/:id" component={ConnectedConfirm} />
