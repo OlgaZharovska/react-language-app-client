@@ -1,9 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+
+import GlobalStyle from "../styles/globalStyle";
+
 import { Navigation } from "./Navigation";
 import { ConnectedLogin } from "./Login";
 import { Home } from "./Home";
+import Experimental from "./experimental/Experimental";
 import TrainComponent from "./Train";
 import Dashboard from "./Dashboard";
 import { ConnectedPreSignup } from "./PreSignup";
@@ -59,6 +63,7 @@ export const Main = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Navigation auth={checkAuth()}></Navigation>
+
       <Switch>
         <>
           <Route exact path="/" render={Home} />
@@ -66,6 +71,7 @@ export const Main = () => (
           <Route exact path="/login" component={ConnectedLogin} />
           <Route exact path="/addphrase" component={AddPhrase} />
           <Route exact path="/phraselist" component={PaginatedPhraseList} />
+          <Route exact path="/exp" component={Experimental} />
           <ProtectedRoute exact path="/train" component={TrainComponent} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route exact path="/confirm/:id" component={ConnectedConfirm} />

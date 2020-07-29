@@ -1,5 +1,5 @@
 import React from "react";
-import * as mutations from "../store/mutations";
+import * as mutations from "../../store/mutations";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Phrase from "./Phrase";
 const PhraseList = ({ phrases }) => (
   <>
-    <ul className="list-group mb-4">
+    <ul className="phrases-container">
       {phrases.map((item, i) => (
         <Phrase key={i} phrase={item.phrase} translation={item.translation} />
       ))}

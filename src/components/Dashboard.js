@@ -7,7 +7,7 @@ import { store } from "../store";
 import { Link } from "react-router-dom";
 console.log(store.getState());
 const Dashboard = ({ logoutUser, phrases }) => (
-  <div className="row">
+  <div>
     manager
     <Link to="/train">Blog</Link>
     <button onClick={logoutUser} style={{ width: "50px", height: "10px" }}>
@@ -16,13 +16,13 @@ const Dashboard = ({ logoutUser, phrases }) => (
   </div>
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   logoutUser() {
     dispatch({ type: mutations.REQUEST_LOGOUT });
   }
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: state.session.authenticated,
   phrases: state.phrasesToTrain
 });

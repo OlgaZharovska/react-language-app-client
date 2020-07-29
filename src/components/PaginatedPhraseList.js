@@ -5,9 +5,8 @@ import { withRouter } from "react-router";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
 
-import Phrase from "./Phrase";
 import Pagination from "./Pagination";
-import PhraseList from "./PhraseList";
+import PhraseList from "./phrases/PhraseList";
 
 class PaginatedPhraseList extends React.Component {
   constructor(props) {
@@ -17,14 +16,6 @@ class PaginatedPhraseList extends React.Component {
       postsPerPage: 2
     };
     this.paginate = this.paginate.bind(this);
-    // this.currentPage = 1;
-    // this.postsPerPage = 1;
-    // this.indexOfLastPost = this.currentPage * this.postsPerPage;
-    // this.indexOfFirstPost = this.indexOfLastPost - this.postsPerPage;
-    // this.currentPhrases = props.phrases.slice(
-    //   this.indexOfFirstPost,
-    //   this.indexOfLastPost
-    // );
   }
 
   componentDidMount() {
@@ -57,24 +48,9 @@ const mapStateToProps = ({ userPhrases }) => ({
   phrases: userPhrases
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  authenticateUser(e) {
-    e.preventDefault();
-    let email = e.target[`email`].value;
-    let password = e.target[`password`].value;
-    dispatch(
-      mutations.requestAuthenticateUser(email, password, ownProps.history)
-    );
-  }
-});
+const mapDispatchToProps = (dispatch, ownProps) => ({});
 
 export default compose(
   connect(mapStateToProps, null),
   withRouter
 )(PaginatedPhraseList);
-/* <PhraseList
-  phrases={this.props.phrases.slice(
-    this.indexOfFirstPost,
-    this.indexOfLastPost
-  )}
-/>; */
