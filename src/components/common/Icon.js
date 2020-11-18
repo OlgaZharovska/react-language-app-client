@@ -8,8 +8,7 @@ export const Icon = ({ name, ...props }) => {
   return <IconComponent {...props} />;
 };
 
-Icon.propTypes = {
-  name: T.string.isRequired,
+Icon.propTypes = {  name: T.string.isRequired,
   size: T.string.isRequired,
   color: T.string.isRequired
 };
@@ -17,3 +16,5 @@ Icon.defaultProps = {
   size: "18px",
   color: "violet"
 };
+
+

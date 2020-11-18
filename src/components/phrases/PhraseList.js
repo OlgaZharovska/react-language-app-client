@@ -6,11 +6,16 @@ import { compose } from "redux";
 import { Link } from "react-router-dom";
 
 import Phrase from "./Phrase";
-const PhraseList = ({ phrases }) => (
+const PhraseList = ({ phrases, onDelete }) => (
   <>
     <ul className="phrases-container">
       {phrases.map((item, i) => (
-        <Phrase key={i} phrase={item.phrase} translation={item.translation} />
+        <Phrase
+          key={i}
+          phrase={item.phrase}
+          translation={item.translation}
+          onDelete={onDelete}
+        />
       ))}
     </ul>
   </>

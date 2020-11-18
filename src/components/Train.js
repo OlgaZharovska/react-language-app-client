@@ -75,14 +75,11 @@ class TrainComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="phrases_train">
         {this.state.checkingPhrase === true &&
           (this.state.color === "blue" ? "colorized" : null)}
 
-        <div
-          id="screen"
-          style={{ background: `${this.state.color}`, width: 120, height: 60 }}
-        >
+        <div className="screen" style={{ background: `${this.state.color}` }}>
           {this.state.phrasesSet.length !== 0
             ? this.state.phrasesSet[0]
             : "waiting"}
@@ -105,10 +102,10 @@ class TrainComponent extends React.Component {
           <button id="show" className="btn" info="Show" onClick={this.onShow}>
             Show
           </button>
-          <button id="checker" onClick={this.onCheck}>
+          <button id="checker" className="btn" onClick={this.onCheck}>
             Check
           </button>
-          <button id="next" onClick={this.onNextPhrase}>
+          <button id="next" className="btn" onClick={this.onNextPhrase}>
             Next Phrase
           </button>
         </div>

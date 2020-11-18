@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 
 import GlobalStyle from "../styles/globalStyle";
 
-import { Navigation } from "./Navigation";
+import Navigation from "./Navigation";
 import { ConnectedLogin } from "./Login";
 import { Home } from "./Home";
 import Experimental from "./experimental/Experimental";
@@ -28,9 +28,10 @@ import PaginatedPhraseList from "./PaginatedPhraseList";
 const checkAuth = () => {
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    return false;
-  }
+  return true;
+  // if (!token) {
+  //   return false;
+  // }
 
   // try {
   //   // { exp: 12903819203 }
@@ -42,8 +43,6 @@ const checkAuth = () => {
   // } catch (e) {
   //   return false;
   // }
-
-  return true;
 };
 
 const ProtectedRoute = ({ component: Component, ...rest }) => (
@@ -62,20 +61,25 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
 export const Main = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Navigation auth={checkAuth()}></Navigation>
-
       <Switch>
-        <>
-          <Route exact path="/" render={Home} />
-          <Route exact path="/signup" component={ConnectedPreSignup} />
-          <Route exact path="/login" component={ConnectedLogin} />
-          <Route exact path="/addphrase" component={AddPhrase} />
-          <Route exact path="/phraselist" component={PaginatedPhraseList} />
-          <Route exact path="/exp" component={Experimental} />
-          <ProtectedRoute exact path="/train" component={TrainComponent} />
-          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/confirm/:id" component={ConnectedConfirm} />
-        </>
+        <div className="zalupa">
+          <Navigation auth={checkAuth()}></Navigation>
+          <div className="main">
+            <Route exact path="/" render={Home} />
+            <Route exact path="/signup" component={ConnectedPreSignup} />
+            <Route exact path="/login" component={ConnectedLogin} />
+            <Route exact path="/addphrase" component={AddPhrase} />
+            <ProtectedRoute
+              exact
+              path="/phrases"
+              component={PaginatedPhraseList}
+            />
+            <Route exact path="/exp" component={Experimental} />
+            <ProtectedRoute exact path="/train" component={TrainComponent} />
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/confirm/:id" component={ConnectedConfirm} />
+          </div>
+        </div>
       </Switch>
     </BrowserRouter>
   </Provider>

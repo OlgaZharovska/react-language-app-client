@@ -10,11 +10,14 @@ class AddPhrase extends React.Component {
     super(props);
     this.state = {
       phrase: "",
-      translation: ""
+      translation: "",
+      options: ["фраза","іменник", "прикметник", "дієслово","прислівник", "прийменник", "сполучник" ],
+      selected: false
     };
     this.addPhrase = this.addPhrase.bind(this);
     this.onPhraseChange = this.onPhraseChange.bind(this);
     this.onTranslationChange = this.onTranslationChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
   addPhrase() {
@@ -33,34 +36,44 @@ class AddPhrase extends React.Component {
     });
   }
 
+  handleCategoryChange(category){
+    this.setState({category});
+    console.log(this.state)
+  }
+
   render() {
     return (
-      <div className="input-container">
-        <div className="form__group">
-          <div className="form__group">
+      <div className="add-phrase">
+  
+          <div className="form-phrase">
             <input
               type="text"
               name="phrase"
-              className="form__input"
-              placeholder=""
+              className="form-phrase-input"
+              placeholder="phrase"
               onChange={this.onPhraseChange}
             />
-          </div>
-          <div className="form__group">
+            
             <input
               type="text"
               name="translation"
-              className="form__input"
-              placeholder=""
+              className="form-phrase-input"
+              placeholder="translation"
               onChange={this.onTranslationChange}
             />
-          </div>
+            <select required name="select" onChange={event => this.handleCategoryChange(event.target.value)}>
+            <option value="" disabled selected hidden>Select your option</option>
+              {this.state.options.map((n) =>
+                 (<option value={n} >{n}</option>)
+              )}
+              
+            </select>
         </div>
         <div className="form__group u-margin-bottom-medium"></div>
         <div className="form__group center">
           <button onClick={this.addPhrase}>add</button>
         </div>
-      </div>
+        </div>
     );
   }
 }

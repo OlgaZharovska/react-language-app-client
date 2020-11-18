@@ -1,28 +1,58 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
+import {Icon} from "../components/common/Icon"
 
 export const NavLinks = () => (
   <ul>
-    <li>
-      <NavLink to="/signin">Sign In</NavLink>
+    <li className="navigation__item">
+      <NavLink className="navigation__link" to="/signin">
+        <Icon name="remove"/>
+      </NavLink>
     </li>
-    <li>
-      <NavLink to="signup">Sign Up</NavLink>
+    <li className="navigation__item">
+      <NavLink className="navigation__link" to="/signup">
+        Sign Up
+      </NavLink>
     </li>
   </ul>
 );
 export const ProtectedNavLinks = () => (
   <ul>
-    <li>
-      <NavLink to="/train">Train</NavLink>
+    <li className="navigation__item">
+      <a href="/train" class="navigation__link">
+      <Icon name="remove" size="45px"/>
+      <span className="nav-text">Train</span>
+
+      </a>
     </li>
-    <li>
-      <NavLink to="/dashboard">Dashboard</NavLink>
+    <li className="navigation__item">
+      <Link className="navigation__link" to="/phrases">
+      <Icon name="remove" size="45px"/>
+      <span className="nav-text">Phrases</span>
+      </Link>
     </li>
-    <li>
-      <NavLink to="/logout">Log Out</NavLink>
+    <li className="navigation__item">
+      <Link className="navigation__link" to="/dashboard">
+      <Icon name="remove" size="45px"/>
+<span className="nav-text">Dashboard</span>
+      </Link>
+    </li>
+    <li className="navigation__item">
+      <Link className="navigation__link" to="/logout">
+      <Icon name="remove" size="45px"/>
+<span className="nav-text">Log Out</span>
+      </Link>
     </li>
   </ul>
 );
-export const Navigation = ({ auth }) =>
-  auth ? <ProtectedNavLinks /> : <NavLinks />;
+const Navigation = ({ auth }) => (
+  <nav class="navigation">
+    <ul class="navigation__list">
+      {auth ? <ProtectedNavLinks /> : <NavLinks />}
+    </ul>
+  </nav>
+);
+
+export default withRouter(Navigation);

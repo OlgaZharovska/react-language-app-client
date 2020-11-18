@@ -16,6 +16,7 @@ class PaginatedPhraseList extends React.Component {
       postsPerPage: 2
     };
     this.paginate = this.paginate.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +27,9 @@ class PaginatedPhraseList extends React.Component {
     this.setState({ currentPage: pageNumber });
   }
 
+  onDelete(phrase) {
+    console.log(phrase);
+  }
   render() {
     let indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
     let indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
@@ -33,6 +37,7 @@ class PaginatedPhraseList extends React.Component {
       <>
         <PhraseList
           phrases={this.props.phrases.slice(indexOfFirstPost, indexOfLastPost)}
+          onDelete={this.onDelete}
         />
         <Pagination
           postsPerPage={this.state.postsPerPage}
