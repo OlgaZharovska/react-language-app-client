@@ -13,7 +13,8 @@ class PaginatedPhraseList extends React.Component {
     super(props);
     this.state = {
       currentPage: 1,
-      postsPerPage: 2
+      postsPerPage: 2,
+      rightArrowDisabled: false
     };
     this.paginate = this.paginate.bind(this);
     this.onDelete = this.onDelete.bind(this);
@@ -23,8 +24,17 @@ class PaginatedPhraseList extends React.Component {
     console.log(this.props);
   }
 
-  paginate(pageNumber) {
-    this.setState({ currentPage: pageNumber });
+  paginate(isAscending) {
+    isAscending
+      ? this.setState({ currentPage: --this.state.currentPage })
+      : this.setState({ currentPage: ++this.state.currentPage });
+
+    if (
+      this.props.phrases.length / this.state.currentPage + 1 <=
+      this.state.postsPerPage
+    ) {
+      this.setState({ rightArrowDisabled: true });
+    }
   }
 
   onDelete(phrase) {
@@ -39,11 +49,24 @@ class PaginatedPhraseList extends React.Component {
           phrases={this.props.phrases.slice(indexOfFirstPost, indexOfLastPost)}
           onDelete={this.onDelete}
         />
-        <Pagination
-          postsPerPage={this.state.postsPerPage}
-          totalPosts={this.props.phrases.length}
-          paginate={this.paginate}
-        />
+        <div>
+          <button
+            className="paginate left"
+            onClick={() => this.paginate(true)}
+            disabled={this.state.currentPage === 1}
+          >
+            <i className="paginationArrowLeftUpper"></i>
+            <i className="paginationArrowLeftLower"></i>
+          </button>
+          <button
+            className="paginate right"
+            onClick={() => this.paginate(false)}
+            disabled={this.state.rightArrowDisabled}
+          >
+            <i className="paginationArrowRightUpper"></i>
+            <i className="paginationArrowRightLower"></i>
+          </button>
+        </div>
       </>
     );
   }

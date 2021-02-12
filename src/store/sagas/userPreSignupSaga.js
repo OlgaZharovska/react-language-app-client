@@ -3,7 +3,7 @@ import { take } from "redux-saga/effects";
 import axios from "axios";
 
 const url =
-  process.env.NODE_ENV === "production" ? `` : `http://localhost:7777`;
+  process.env.NODE_ENV === "production" ? `` : `http://localhost:8080`;
 
 export function* userPreSignupSaga() {
   while (true) {

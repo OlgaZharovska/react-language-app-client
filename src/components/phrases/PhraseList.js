@@ -12,6 +12,7 @@ const PhraseList = ({ phrases, onDelete }) => (
       {phrases.map((item, i) => (
         <Phrase
           key={i}
+          className='phrasebox'
           phrase={item.phrase}
           translation={item.translation}
           onDelete={onDelete}

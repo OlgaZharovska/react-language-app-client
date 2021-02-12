@@ -3,7 +3,7 @@ import axios from "axios";
 import * as mutations from "../mutations";
 
 const url =
-  process.env.NODE_ENV === "production" ? `` : `http://localhost:7777`;
+  process.env.NODE_ENV === "production" ? `` : `http://localhost:8080`;
 // const history = createBrowserHistory();
 
 export function* userAuthenticationSaga() {

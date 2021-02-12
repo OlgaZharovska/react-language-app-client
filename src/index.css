@@ -54,6 +54,7 @@ html {
   padding: 0 15px 20px;
   position: relative;
   background-image: url("./assets/51b47f65415343.5f78bb1a294ef.jpg");
+  display: flex;
 
   /* background: linear-gradient(top to left, #50a3a2 0%, #53e3a6 100%); */
   display: flex;
@@ -130,7 +131,7 @@ html {
 
 .navigation {
   background: #f7f7f7;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   height: 100%;
@@ -186,6 +187,121 @@ html {
   font-family: "Titillium Web", sans-serif;
 }
 
+.phrases-container {
+  flex: 0 0 40%;
+  height: 70rem;
+  margin: 2rem 2rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.phrase {
+  border-bottom: 1px solid grey;
+  padding: 1rem 1rem 1.5rem !important;
+}
+
+.phrasebox {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 1rem 2.5rem;
+  margin: 1.5rem 0 0 0;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  width: 50rem;
+  text-align: left !important;
+  position: relative;
+}
+
+.phrasebox:first-child {
+  margin: 10rem 0 0 0;
+}
+
+/* .phrase {
+} */
+
+.delete-btn {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  height: 2rem;
+  width: 2rem;
+  top: 2rem;
+  right: 2rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  /* background-image: url(./delete-icon.png); */
+  background-size: cover;
+}
+
+/*PAGINATION*/
+
+.paginate {
+  position: relative;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  -webkit-filter: drop-shadow(0 2px 0px rgba(0, 0, 0, 0.2));
+}
+
+.paginate i {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 50px;
+  height: 5px;
+  border-radius: 5px / 2;
+  background-color: lawngreen;
+
+  transition: all 0.15s ease;
+}
+
+.left {
+  right: 58%;
+}
+
+.left i {
+  transform-origin: 0% 50%;
+}
+
+.left i:first-child {
+  transform: translate(0, -1px) rotate(40deg);
+}
+
+.left i:last-child {
+  transform: translate(0, 1px) rotate(-40deg);
+}
+
+.right {
+  left: 58%;
+}
+
+.right i {
+  transform-origin: 100% 50%;
+}
+
+.right i:first-child {
+  transform: translate(0, 1px) rotate(40deg);
+}
+
+.right i:last-child {
+  transform: translate(0, -1px) rotate(-40deg);
+}
+
+button {
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
 /*  @font-face{font-family:"ico-moon";src:url(/assets/icomoon-a27ad33be51fca30f1dd5bb821dbac5fa008f3247c3402a0da190a4636b7a63c.woff) format("woff"),url(/assets/icomoon-ddeb1cc15e7b835a9b5ce328b6f12d3f18cb0377874280dbbcc37cb6187ef927.ttf) format("truetype"),url(/assets/icomoon-b501695aad9b7e8f3d9cd8ecb51a2646bfc9e3713554431a4473244f1f9a3d6b.svg#ico-moon) format("svg");
   font-weight:400;font-style:normal;font-display:swap}[class^="icon-moon-"]:before,[class*=" icon-moon-"]:before{font-family:"ico-moon";font-style:normal;speak:none;font-weight:normal;line-height:1;font-smoothing:antialiased;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}i[class^="icon-moon-"]{margin-right:5px;font-size:1em}.icon-moon-commonlisp
   :before{content:"\e933"}.icon-moon-haxe:before{content:"\e932"}.icon-moon-cobol:before{content:"\e931"}.icon-moon-lean:before{content:"\e930"}.icon-moon-cfml:before{content:"\e92f"}.icon-moon-factor:before{content:"\e92e"}.icon-moon-vb:before{content:"\e92d"}.icon-moon-coq:before{content:"\e92b"}.icon-moon-agda:before{content:"\e92c"}.icon-moon-idris:before{content:

@@ -11,7 +11,16 @@ class AddPhrase extends React.Component {
     this.state = {
       phrase: "",
       translation: "",
-      options: ["фраза","іменник", "прикметник", "дієслово","прислівник", "прийменник", "сполучник" ],
+      category: "",
+      options: [
+        "фраза",
+        "іменник",
+        "прикметник",
+        "дієслово",
+        "прислівник",
+        "прийменник",
+        "сполучник"
+      ],
       selected: false
     };
     this.addPhrase = this.addPhrase.bind(this);
@@ -21,7 +30,11 @@ class AddPhrase extends React.Component {
   }
 
   addPhrase() {
-    this.props.addPhrase(this.state);
+    this.props.addPhrase({
+      phrase: this.state.phrase,
+      translation: this.state.translation,
+      category: this.state.category
+    });
   }
 
   onPhraseChange(e) {
@@ -36,44 +49,50 @@ class AddPhrase extends React.Component {
     });
   }
 
-  handleCategoryChange(category){
-    this.setState({category});
-    console.log(this.state)
+  handleCategoryChange(category) {
+    this.setState({ category });
+    console.log(category);
   }
 
   render() {
     return (
       <div className="add-phrase">
-  
-          <div className="form-phrase">
-            <input
-              type="text"
-              name="phrase"
-              className="form-phrase-input"
-              placeholder="phrase"
-              onChange={this.onPhraseChange}
-            />
-            
-            <input
-              type="text"
-              name="translation"
-              className="form-phrase-input"
-              placeholder="translation"
-              onChange={this.onTranslationChange}
-            />
-            <select required name="select" onChange={event => this.handleCategoryChange(event.target.value)}>
-            <option value="" disabled selected hidden>Select your option</option>
-              {this.state.options.map((n) =>
-                 (<option value={n} >{n}</option>)
-              )}
-              
-            </select>
+        <div className="form-phrase">
+          <input
+            type="text"
+            name="phrase"
+            className="form-phrase-input"
+            placeholder="phrase"
+            onChange={this.onPhraseChange}
+          />
+
+          <input
+            type="text"
+            name="translation"
+            className="form-phrase-input"
+            placeholder="translation"
+            onChange={this.onTranslationChange}
+          />
+          <select
+            required
+            name="select"
+            onChange={(event) => this.handleCategoryChange(event.target.value)}
+          >
+            <option value="" disabled selected hidden>
+              Select your option
+            </option>
+            {this.state.options.map((n) => (
+              <option value={n}>{n}</option>
+            ))}
+          </select>
         </div>
         <div className="form__group u-margin-bottom-medium"></div>
         <div className="form__group center">
-          <button onClick={this.addPhrase}>add</button>
+          <button className="delete-btn" onClick={this.addPhrase}>
+            ADD
+          </button>
         </div>
-        </div>
+      </div>
     );
   }
 }
