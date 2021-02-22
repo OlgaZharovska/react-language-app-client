@@ -8,12 +8,12 @@ const url =
 export function* addPhraseSaga() {
   while (true) {
     const { phraseSet } = yield take(mutations.REQUEST_ADD_PHRASE);
-    const userName = localStorage.getItem("userName");
+    // const userName = localStorage.getItem("userName");
     const phraseObj = {
       phrase: phraseSet.phrase,
       translation: phraseSet.translation,
       category: phraseSet.category,
-      userName
+      userName: "olga"
     };
     try {
       const res = yield axios.post(url + "/phrases", phraseObj);

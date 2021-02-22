@@ -5,9 +5,9 @@ export let defaultState = {
   session: { id: "huk", token: "", authenticated: false },
   trainingSession: {},
   userPhrases: [
-    { phrase: "bla", translation: "fra" },
-    { phrase: "Bio", translation: "Fio" },
-    { phrase: "Ham", translation: "Bam" }
+    // { phrase: "bla", translation: "fra" },
+    // { phrase: "Bio", translation: "Fio" },
+    // { phrase: "Ham", translation: "Bam" }
   ],
   phrasesToTrain: [
     ["vla", "bfa"],
